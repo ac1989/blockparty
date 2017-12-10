@@ -1,0 +1,30 @@
+.filter {
+  height: 42px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background: #17272d;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.toggle-filters {
+  width: 42px;
+  height: 42px;
+  color: #f5f5f5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter input[type='text'] {
+  height: 25px;
+  border: none;
+  padding: 0;
+  margin-top: -1px;
+}
+
+.fa-chevron-down {
+  margin-top: -3px;
+}

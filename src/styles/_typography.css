@@ -1,0 +1,21 @@
+p {
+  font-size: 1em;
+  margin: 0 16px 0 16px;
+  padding: 10px 0 16px 0;
+  line-height: 150%;
+}
+
+h2 {
+  font-size: 1.25em;
+  padding-top: 6px;
+  margin: 0 0 0 10px;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 1em;
+  line-height: 150%;
+  font-weight: normal;
+  margin: 0 0 0 10px;
+  padding-top: 5px;
+}
