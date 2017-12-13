@@ -1,0 +1,77 @@
+.date-picker {
+  width: 350px;
+  height: 360px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.week-title-row {
+  display: flex;
+  width: 350px;
+  justify-content: space-around;
+}
+
+.week-title-day {
+  width: 50px;
+  height: 38px;
+  text-align: center;
+}
+
+.month-title-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-day {
+  width: 50px;
+  height: 38px;
+  display: inline-block;
+  text-align: center;
+  transition: all 200ms ease-out;
+}
+
+.calendar-day:hover {
+  cursor: pointer;
+  background: slateblue;
+  color: #f5f5f5;
+  user-select: none;
+}
+
+.selected-day {
+  background: slateblue;
+}
+
+.month-overflow {
+  color: slategrey;
+}
+
+.calendar-month-control {
+  width: 50px;
+  text-align: center;
+}
+
+.calendar-month-control:hover {
+  cursor: pointer;
+  user-select: none;
+  background: slateblue;
+  color: #f5f5f5;
+}
+
+.bottom-controls-row {
+  display: flex;
+  justify-content: right;
+}
+
+.save-control,
+.close-control {
+  width: 50px;
+  text-align: center;
+}
+
+.save-control:hover,
+.close-control:hover {
+  cursor: pointer;
+  user-select: none;
+  background: slateblue;
+  color: #f5f5f5;
+}

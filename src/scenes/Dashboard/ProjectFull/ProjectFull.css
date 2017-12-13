@@ -25,6 +25,7 @@
 .project-full-title {
   height: 52px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
 }
 
 .detail-title {
@@ -47,4 +48,10 @@
 .link-list a:hover {
   background: #17272d;
   color: #f5f5f5;
+}
+
+textarea {
+  width: 90%;
+  display: block;
+  margin: auto;
 }

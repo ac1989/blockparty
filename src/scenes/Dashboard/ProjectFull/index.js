@@ -1,60 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProjectTitle from './ProjectTitle';
+import ProjectDescription from './ProjectDescription';
+import ProjectDates from './ProjectDates';
+import ProjectRepo from './ProjectRepo';
+import ProjectLinks from './ProjectLinks';
 import MissionList from '../MissionList';
+import DatePicker from '../DatePicker';
+import { editProject } from '../actions/projectActions';
 import './ProjectFull.css';
 
 export class ProjectFull extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      project: this.props.projects.find(project => {
-        return project.id === this.props.match.params.id;
-      })
-    };
-  }
+  state = {
+    showStartPicker: false,
+    showEndPicker: false
+  };
+
+  toggleStartPicker = () => {
+    this.setState(state => ({ showStartPicker: !state.showStartPicker }));
+  };
+
+  toggleEndPicker = () => {
+    this.setState(state => ({ showEndPicker: !state.showEndPicker }));
+  };
+
+  saveChanges = changes => {
+    console.log(this.props.project);
+    console.log(changes);
+    this.props.dispatch(editProject({ ...this.props.project, ...changes }));
+  };
+
   render() {
-    const project = this.state.project;
+    const project = this.props.project;
 
     return (
       <div className="project-full">
         <div className="project-full-details">
-          <div className="project-full-title">
-            <h2>
-              Project | {project.title} | {this.props.match.params.id}
-            </h2>
-          </div>
-          <div className="detail-container">
-            <div className="detail-title">Description</div>
-            <p className="description-content">{project.description}</p>
-          </div>
-          <div className="detail-container">
-            <div className="detail-title">Timeline</div>
-            <div className="timeline-text-only">
-              <li>Beginning</li>
-              <li>Due</li>
-              <li>Duration</li>
-            </div>
-          </div>
-          <div className="detail-container">
-            <div className="detail-title">Project Repo</div>
-            <div className="link-list">
-              <li>
-                <a href="#">{project.repo}</a>
-              </li>
-            </div>
-          </div>
-          <div className="detail-container">
-            <div className="detail-title">Other Links</div>
-            <div className="link-list">
-              {project.links.map((link, index) => {
-                return (
-                  <li key={`link${index}`}>
-                    <a href="#">{link}</a>
-                  </li>
-                );
-              })}
-            </div>
-          </div>
+          <ProjectTitle
+            title={project.title}
+            id={project.id}
+            saveChanges={this.saveChanges}
+          />
+          <ProjectDescription
+            description={project.description}
+            saveChanges={this.saveChanges}
+          />
+          <ProjectDates
+            startDate={project.startDate}
+            endDate={project.endDate}
+            saveChanges={this.saveChanges}
+          />
+          <ProjectRepo repo={project.repo} saveChanges={this.saveChanges} />
+          <ProjectLinks links={project.links} saveChanges={this.saveChanges} />
         </div>
         <MissionList />
       </div>
@@ -62,8 +59,12 @@ export class ProjectFull extends Component {
   }
 }
 
-const mapStateToProps = ({ projects }) => {
-  return { projects };
+const mapStateToProps = ({ projects }, props) => {
+  return {
+    project: projects.find(project => {
+      return project.id === props.match.params.id;
+    })
+  };
 };
 
 export default connect(mapStateToProps)(ProjectFull);

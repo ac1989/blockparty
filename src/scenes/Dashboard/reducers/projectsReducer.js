@@ -7,6 +7,8 @@ const initialState = [
     images: {
       380: 'https://lorempixel.com/380/172/'
     },
+    startDate: new Date(2017, 11, 12),
+    endDate: new Date(2017, 11, 24),
     repo: 'https://github.com/me/mywedderapp',
     links: [
       'https://someweatherapi.com/',
@@ -15,12 +17,14 @@ const initialState = [
     children: [201, 202, 203]
   },
   {
-    title: 'Temp App',
+    title: 'Portfolio Site',
     description: 'An temp App.',
     id: '302',
     images: {
       380: 'https://lorempixel.com/380/172/'
     },
+    startDate: new Date(2017, 11, 31),
+    endDate: new Date(2018, 0, 7),
     repo: 'https://github.com/me/tempapp',
     links: [
       'https://someapi.com/',
@@ -32,6 +36,14 @@ const initialState = [
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'EDIT_PROJECT':
+      return state.map(project => {
+        if (project.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return project;
+        }
+      });
     default:
       return state;
   }
