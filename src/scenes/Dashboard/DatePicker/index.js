@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import getDaysInMonth from 'date-fns/get_days_in_month';
 import getDay from 'date-fns/get_day';
 import getDate from 'date-fns/get_date';
-import getMonth from 'date-fns/get_month';
 import format from 'date-fns/format';
 import eachDay from 'date-fns/each_day';
 import startOfMonth from 'date-fns/start_of_month';
@@ -50,8 +48,8 @@ const CalendarDay = ({ date, selectedDate, displayMonth, onClick }) => {
 
 export default class DatePicker extends Component {
   constructor(props) {
-    console.log('const');
     super(props);
+    console.log(props.date);
     this.state = {
       displayMonth: this.props.date
     };

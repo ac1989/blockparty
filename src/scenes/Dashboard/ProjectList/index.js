@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getVisibleProjects } from '../selectors';
+import ProjectNew from '../ProjectNew';
 import ProjectItem from '../ProjectItem';
+
 import './ProjectList.css';
 
 export class ProjectList extends Component {
   render() {
     return (
       <div className="project-list">
+        <ProjectNew />
         {this.props.projects.map(project => {
           return (
             <ProjectItem
@@ -24,8 +28,8 @@ export class ProjectList extends Component {
   }
 }
 
-const mapStateToProps = ({ projects }) => {
-  return { projects };
+const mapStateToProps = ({ projects, filter }) => {
+  return { projects: getVisibleProjects(projects, filter) };
 };
 
 export default connect(mapStateToProps)(ProjectList);

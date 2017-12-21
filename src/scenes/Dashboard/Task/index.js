@@ -9,6 +9,10 @@ export default class Task extends Component {
           className={
             this.props.isDue ? 'panel-title panel-title-due' : 'panel-title'
           }
+          onClick={() => {
+            console.log(this.props.id);
+            this.props.saveChanges({ title: 'Changed' }, this.props.id);
+          }}
         >
           <h3>{this.props.title}</h3>
         </div>

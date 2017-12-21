@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4';
+
 const initialState = [
   {
     title: 'Weather App',
@@ -14,7 +16,7 @@ const initialState = [
       'https://someweatherapi.com/',
       'https://github.com/someone/somestyleguide'
     ],
-    children: [201, 202, 203]
+    children: ['201', '202', '203']
   },
   {
     title: 'Portfolio Site',
@@ -34,8 +36,24 @@ const initialState = [
   }
 ];
 
+const newProject = () => {
+  return {
+    title: 'New Project',
+    description: 'A brand new project.',
+    id: uuidv4(),
+    images: {},
+    startDate: new Date(),
+    endDate: undefined,
+    repo: '',
+    links: [],
+    children: []
+  };
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'ADD_PROJECT':
+      return [newProject(), ...state];
     case 'EDIT_PROJECT':
       return state.map(project => {
         if (project.id === action.payload.id) {

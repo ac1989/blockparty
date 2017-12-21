@@ -1,10 +1,11 @@
-.project-full {
+.display-full {
   margin-top: 25px;
+  margin-bottom: 120px;
   display: flex;
   justify-content: space-around;
 }
 
-.project-full-details {
+.display-full-details {
   width: 640px;
   list-style: none;
 }
@@ -13,25 +14,44 @@
   background: #f5f5f5;
   margin-top: 1em;
   padding-bottom: 1em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
 }
 
-.project-full-title,
+.full-title,
 .detail-title {
   background: #17272d;
   color: #f5f5f5;
 }
 
-.project-full-title {
-  height: 52px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.detail-title-row {
   display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+  margin: 0 16px 0 16px;
+}
+
+.full-title {
+  height: 52px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+  display: flex;
+  justify-content: space-between;
+}
+
+.full-title i {
+  width: 52px;
+  height: 1.5em;
+  text-align: center;
+  padding-top: 0.5em;
+}
+
+.full-title i:hover {
+  color: #17272d;
+  background: #f5f5f5;
 }
 
 .detail-title {
   display: inline-block;
   padding-right: 10px;
-  margin: 1em 0 0 16px;
 }
 
 .link-list,
@@ -40,9 +60,15 @@
   padding-top: 10px;
 }
 
+.link-list li {
+  display: flex;
+  justify-content: right;
+}
+
 .link-list a {
   color: #0d171a;
   transition: all 200ms ease;
+  margin-right: auto;
 }
 
 .link-list a:hover {
@@ -50,8 +76,67 @@
   color: #f5f5f5;
 }
 
+.title-input {
+  width: 10em;
+  padding: 0;
+  padding: 0 1em 5px 0;
+  color: #f5f5f5;
+  background: #676767;
+  border: none;
+  font-size: 1em;
+}
+
+.link-input {
+  width: 400px;
+  background: #17272d;
+  color: #f5f5f5;
+  border: none;
+  padding: 0;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+
 textarea {
-  width: 90%;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
   display: block;
+  padding: 10px 16px 0 16px;
+  margin: 0;
+  background: #f5f5f5;
+  border: none;
+  font-size: 1em;
+  line-height: 150%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.centered-icon-28 {
+  display: flex;
+  text-align: center;
+  width: 28px;
+  height: 28px;
+}
+
+.centered-icon-28:hover {
+  color: #f5f5f5;
+  background: #17272d;
+}
+
+.centered-icon-28 i {
   margin: auto;
+}
+
+.description-content {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.add-link {
+  margin: 0 16px 0 16px;
+  display: flex;
+  justify-content: right;
+}
+
+.link-input {
+  margin-right: auto;
 }

@@ -7,13 +7,17 @@
   background: #f5f5f5;
   width: 380px;
   margin: 0 10px 20px 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); */
 }
 
 .panel-title {
   height: 40px;
   color: #f5f5f5;
   background: #17272d;
+}
+
+.panel-title a {
+  color: #f5f5f5;
 }
 
 .panel-title-due {
@@ -24,7 +28,14 @@
   margin-top: auto;
 }
 
-.child-list li:hover {
+.child-list li,
+.child-list a {
+  color: #0d0d0d;
+  display: block;
+}
+
+.child-list li:hover,
+.child-list a:hover {
   color: #f5f5f5;
   background: #17272d;
   cursor: pointer;

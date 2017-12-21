@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class ProjectTitle extends Component {
+export default class FullTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ export default class ProjectTitle extends Component {
 
   handleKeyPress = e => {
     const code = e.keyCode || e.charCode;
-    if (code == 13) {
+    if (code === 13) {
       this.props.saveChanges({ title: this.state.title });
       this.toggleEditMode();
     }
@@ -35,21 +35,21 @@ export default class ProjectTitle extends Component {
   render() {
     if (this.state.editMode) {
       return (
-        <div className="project-full-title">
+        <div className="full-title">
           <h2>
-            Project |
+            {this.props.type} |{' '}
             <input
               type="text"
+              class="title-input"
               autoFocus
               onFocus={this.handleFocus}
               value={this.state.title}
               onChange={this.handleInput}
               onKeyPress={this.handleKeyPress}
-            />{' '}
-            | {this.state.id}
+            />
           </h2>
           <i
-            className="fa fa-save"
+            className="fa fa-save fa-lg"
             onClick={() => {
               this.props.saveChanges({ title: this.state.title });
               this.toggleEditMode();
@@ -59,11 +59,11 @@ export default class ProjectTitle extends Component {
       );
     } else {
       return (
-        <div className="project-full-title">
+        <div className="full-title">
           <h2 onDoubleClick={this.toggleEditMode}>
-            Project | {this.state.title} | {this.state.id}
+            {this.props.type} | {this.state.title}
           </h2>
-          <i className="fa fa-pencil" onClick={this.toggleEditMode} />
+          <i className="fa fa-pencil fa-lg" onClick={this.toggleEditMode} />
         </div>
       );
     }

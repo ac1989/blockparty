@@ -1,59 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ProjectTitle from './ProjectTitle';
-import ProjectDescription from './ProjectDescription';
-import ProjectDates from './ProjectDates';
-import ProjectRepo from './ProjectRepo';
-import ProjectLinks from './ProjectLinks';
+import FullTitle from '../FullTitle';
+import FullDescription from '../FullDescription';
+import FullDates from '../FullDates';
+import FullRepo from '../FullRepo';
+import FullLinks from '../FullLinks';
 import MissionList from '../MissionList';
-import DatePicker from '../DatePicker';
 import { editProject } from '../actions/projectActions';
+import { setFilterBy, setFilterId } from '../actions/filterActions';
 import './ProjectFull.css';
 
 export class ProjectFull extends Component {
-  state = {
-    showStartPicker: false,
-    showEndPicker: false
-  };
-
-  toggleStartPicker = () => {
-    this.setState(state => ({ showStartPicker: !state.showStartPicker }));
-  };
-
-  toggleEndPicker = () => {
-    this.setState(state => ({ showEndPicker: !state.showEndPicker }));
-  };
+  componentDidMount() {
+    this.props.dispatch(setFilterBy('parentId'));
+    this.props.dispatch(setFilterId(this.props.match.params.id));
+  }
 
   saveChanges = changes => {
-    console.log(this.props.project);
-    console.log(changes);
     this.props.dispatch(editProject({ ...this.props.project, ...changes }));
   };
 
   render() {
     const project = this.props.project;
-
     return (
-      <div className="project-full">
-        <div className="project-full-details">
-          <ProjectTitle
+      <div className="display-full">
+        <div className="display-full-details">
+          <FullTitle
+            type={'Project'}
             title={project.title}
             id={project.id}
             saveChanges={this.saveChanges}
           />
-          <ProjectDescription
+          <FullDescription
             description={project.description}
             saveChanges={this.saveChanges}
           />
-          <ProjectDates
+          <FullDates
             startDate={project.startDate}
             endDate={project.endDate}
             saveChanges={this.saveChanges}
           />
-          <ProjectRepo repo={project.repo} saveChanges={this.saveChanges} />
-          <ProjectLinks links={project.links} saveChanges={this.saveChanges} />
+          <FullRepo repo={project.repo} saveChanges={this.saveChanges} />
+          <FullLinks links={project.links} saveChanges={this.saveChanges} />
         </div>
-        <MissionList />
+        <MissionList parentId={this.props.match.params.id} />
       </div>
     );
   }

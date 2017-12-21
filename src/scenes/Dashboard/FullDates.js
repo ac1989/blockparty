@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from '../DatePicker';
+import DatePicker from './DatePicker';
 import format from 'date-fns/format';
 import distanceInWords from 'date-fns/distance_in_words';
 
@@ -38,46 +38,59 @@ export default class ProjectDates extends Component {
     this.setState({ showStartPicker: false, showEndPicker: false });
   };
 
+  renderDatePicker = (date = new Date(), selectDate) => {
+    return (
+      <DatePicker date={date} selectDate={selectDate} save={this.saveDates} />
+    );
+  };
+
   render() {
     return (
       <div className="detail-container">
-        <div className="detail-title">Timeline</div>
+        <div className="detail-title-row">
+          <div className="detail-title">Timeline</div>
+        </div>
         <div className="timeline-text-only">
           <li
             onClick={() => {
               this.toggleStartPicker();
             }}
           >
-            Beginning: {format(this.props.startDate, 'Do MMM YYYY')}
+            Beginning:{' '}
+            {this.state.startDate ? (
+              format(this.props.startDate, 'Do MMM YYYY')
+            ) : (
+              <span>No Date Found</span>
+            )}
           </li>
-          {this.state.showStartPicker && (
-            <DatePicker
-              date={this.state.startDate}
-              selectDate={this.selectStartDate}
-              save={this.saveDates}
-            />
-          )}
+          {this.state.showStartPicker &&
+            this.renderDatePicker(this.state.startDate, this.selectStartDate)}
           <li
             onClick={() => {
               this.toggleEndPicker();
             }}
           >
-            Due: {format(this.props.endDate, 'Do MMM YYYY')}
+            Due:{' '}
+            {this.state.endDate ? (
+              format(this.props.endDate, 'Do MMM YYYY')
+            ) : (
+              <span>No Date Found</span>
+            )}
           </li>
-          {this.state.showEndPicker && (
-            <DatePicker
-              date={this.state.endDate}
-              selectDate={this.selectEndDate}
-              save={this.saveDates}
-            />
+          {this.state.showEndPicker &&
+            this.renderDatePicker(this.state.endDate, this.selectEndDate)}
+          {this.state.startDate &&
+            this.state.endDate && (
+              <li>
+                Duration:{' '}
+                {distanceInWords(this.props.startDate, this.props.endDate)}
+              </li>
+            )}
+          {this.state.endDate && (
+            <li>
+              Time Remaining: {distanceInWords(new Date(), this.props.endDate)}
+            </li>
           )}
-          <li>
-            Duration:{' '}
-            {distanceInWords(this.props.startDate, this.props.endDate)}
-          </li>
-          <li>
-            Time Remaining: {distanceInWords(new Date(), this.props.endDate)}
-          </li>
         </div>
       </div>
     );

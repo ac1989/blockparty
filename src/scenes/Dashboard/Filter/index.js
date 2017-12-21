@@ -1,55 +1,34 @@
 import React, { Component } from 'react';
-import { Transition } from 'react-transition-group';
+import { connect } from 'react-redux';
+import { setFilterBy, setFilterText } from '../actions/filterActions';
 import './Filter.css';
 
-const duration = 100;
-
-const defaultStyle = {
-  transition: `all ${duration}ms ease-out`,
-  transform: `translateY(0)`,
-  opacity: 0
-};
-
-const transitionStyles = {
-  entering: { opacity: 0, transform: `translateY(-100%)` },
-  entered: { opacity: 1, transform: `translateY(0)` },
-  exiting: { opacity: 0, transform: `translateY(-100%)` },
-  exited: { opacity: 0, transform: `translateY(-100%)` }
-};
-
-const SlideInDown = ({ in: inProp }) => (
-  <Transition in={inProp} timeout={duration} unmountOnExit={true}>
-    {state => (
-      <input
-        type="text"
-        style={{
-          ...defaultStyle,
-          ...transitionStyles[state]
-        }}
-      />
-    )}
-  </Transition>
-);
-
-export default class Filter extends Component {
+export class Filter extends Component {
   state = {
-    showFilters: true
+    filterText: 'weather'
   };
-  toggleShowFilters = () => {
-    this.setState(state => ({ showFilters: !state.showFilters }));
+
+  componentDidMount() {
+    this.props.dispatch(setFilterBy('text'));
+  }
+
+  handleChange = e => {
+    const value = e.target.value;
+    this.setState({ filterText: value });
+    this.props.dispatch(setFilterText(value));
   };
+
   render() {
     return (
       <div className="filter">
-        <div className="toggle-filters" onClick={this.toggleShowFilters}>
-          {this.state.showFilters ? (
-            <i className="fa fa-chevron-down" />
-          ) : (
-            <i className="fa fa-chevron-right" />
-          )}
-        </div>
-        <SlideInDown in={!!this.state.showFilters} />
+        <input
+          type="text"
+          value={this.state.filterText}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
 }
+
+export default connect()(Filter);
